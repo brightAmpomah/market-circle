@@ -1,10 +1,10 @@
 const products = [
-    {id: 1, name: "Tomatoes", price: 10, category: "vegetables", image: "/assets/images/tomatoes.jpg"},
-    {id: 2, name: "Apple", price: 15, category: "fruits", image: "/assets/images/fruits.jpg"},
-    {id: 3, name: "Milk", price: 12, category: "dairy", image: "/assets/images/milk.jpg"},
-    {id: 4, name: "Rice", price: 20, category: "cereal", image: "/assets/images/cereal.jpg"},
-    {id: 5, name: "Onions", price: 8, category: "vegetables", image: "/assets/images/onions.jpg"},
-    {id: 6, name: "Lettuces", price: 10, category: "vegetables", image: "/assets/images/lettuce.jpg"}
+    {id: 1, name: "Tomatoes", price: 10, category: "vegetables", image: "assets/images/tomatoes.jpg"},
+    {id: 2, name: "Apple", price: 15, category: "fruits", image: "assets/images/fruits.jpg"},
+    {id: 3, name: "Milk", price: 12, category: "dairy", image: "assets/images/milk.jpg"},
+    {id: 4, name: "Rice", price: 20, category: "cereal", image: "assets/images/cereal.jpg"},
+    {id: 5, name: "Onions", price: 8, category: "vegetables", image: "assets/images/onions.jpg"},
+    {id: 6, name: "Lettuces", price: 10, category: "vegetables", image: "assets/images/lettuce.jpg"}
 ];
 
 const productList = document.getElementById("product-list");
