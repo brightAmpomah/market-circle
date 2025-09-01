@@ -13,14 +13,19 @@ function loadCart() {
     }
 
     cart.forEach((item, index) => {
-        total += item.price;
+        total += item.price * item.quantity;
         cartItems.innerHTML += `
         <tr>
             <td>${item.name}</td>
             <td>${item.price}</td>
             <td>
-                <button class="btn btn-sm btn-danger" onclick="removeFromCart(${index})">Remove</button>
+                <div class="d-flex align-items-center gap-2">
+                    <button class="btn btn-sm btn-outline-success" onclick="updateQuantity(${item.id}, -1)">-</button>
+                    <span>${item.quantity}</span>
+                    <button class="btn btn-sm btn-outline-success" onclick="updateQuantity(${item.id}, 1)">+</button>
+                </div>
             </td>
+            <td>Ghc ${item.price * item.quantity}
         </tr>
         `;
     });
@@ -28,8 +33,16 @@ function loadCart() {
     cartTotal.textContent = "Total: Ghc " + total;
 }
 
-function removeFromCart(index) {
-    cart.splice(index, 1);
+function updateQuantity(productId, change) {
+    const item = cart.find(p => p.id === productId);
+    if (!item) return;
+
+    item.quantity += change;
+
+    if (item.quantity <= 0) {
+        cart = cart.filter(p => p.id !== productId);
+    }
+
     localStorage.setItem("cart", JSON.stringify(cart));
     loadCart();
 }
