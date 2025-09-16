@@ -1,0 +1,3 @@
+[submodule "market-circle"]
+	path = market-circle
+	url = https://github.com/Market-Circle-MC/market-circle.git
