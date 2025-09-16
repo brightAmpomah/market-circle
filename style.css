@@ -88,6 +88,20 @@
     margin: 0 auto;
 }
 
+.mobile-buttom-nav a{
+    color: #333;
+    font-size: 12px;
+}
+
+.mobile-buttom-nav a:hover{
+    color: #28a745;
+}
+
+.navbar .badge {
+    font-size: 10px;
+    padding: 2px 5px;
+}
+
 @media screen and (max-width: 576px) {
     .modal-dialog {
         margin: 0;

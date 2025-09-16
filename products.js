@@ -1,15 +1,7 @@
-const urlParams = new URLSearchParams(window.location.search);
-const selectedCategory = urlParams.get("category");
-
-if (selectedCategory) {
-    const categoryFilter = document.getElementById("category-filter");
-    if (categoryFilter) {
-        categoryFilter.value = selectedCategory;
-    }
-}
 
 
 document.addEventListener("DOMContentLoaded", () => {
+    
     const productContainer = document.getElementById("product-list");
     const searchBar = document.getElementById("search-bar");
     const categoryFilter = document.getElementById("category-filter");
@@ -169,6 +161,14 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     populateCategories();
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const selectedCategory = urlParams.get("category");
+
+    if (selectedCategory && categoryFilter) {
+        categoryFilter.value = selectedCategory.toLowerCase();
+    }
+    
     renderProducts();
 });
 

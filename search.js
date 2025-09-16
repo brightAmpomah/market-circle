@@ -1,41 +1,31 @@
 document.addEventListener("DOMContentLoaded", () => {
     const searchInput = document.getElementById("navbar-search");
-    const categoryDropdown = document.getElementById("category-dropdown");
+    const dropDown = document.getElementById("category-dropdown");
 
-    if (!searchInput || !categoryDropdown) {
-        return;
-    }
+    const categories = ["fruits", "vegetables", "cereal", "dairy"];
 
-    const products = JSON.parse(localStorage.getItem("products")) || [];
-    const categories = [...new Set(products.map(p => p.category.toLowerCase()))];
+    if (searchInput && dropDown) {
+        searchInput.addEventListener("focus", () => {
+            dropDown.innerHTML = categories.map(cat => `
+                <button class="list-group-item list-group-item-action category-item" data-category="${cat}">
+                    ${cat.charAt(0).toUpperCase() + cat.slice(1)}
+                </button> 
+            `).join("");
+            dropDown.classList.remove("d-none");
+        });
 
+        document.addEventListener("click", (e) => {
+            if (!searchInput.contains(e.target) && !dropDown.contains(e.target)) {
+                dropDown.classList.add("d-none");
+            }
+        });
 
-    if (categories.length > 0) {
-        categoryDropdown.innerHTML = `<div class="list-group-item fw-bold text-muted">Shop by Category</div>`;
-        categories.forEach(cat => {
-            categoryDropdown.innerHTML += `
-            <a href="product.html?category=${encodeURIComponent(cat)}"
-                class="list-group-item list-group-item-action">
-                ${cat.charAt(0).toLowerCase() + cat.slice(1)}
-            </a>
-            `;
+        dropDown.addEventListener("click", (e) => {
+            if (e.target.classList.contains("category-item")) {
+                const category = e.target.getAttribute("data-category");
+                
+                window.location.href = `product.html?category=${category}`;
+            }
         });
     }
-    
-
-    searchInput.addEventListener("focus", () => {
-        categoryDropdown.classList.remove("d-none");
-    });
-
-    searchInput.addEventListener("blur", () => {
-        setTimeout(() => categoryDropdown.classList.add("d-none"), 200);
-    });
-
-    categoryDropdown.addEventListener("click", (e) => {
-        if (e.target.dataset.category) {
-            e.preventDefault();
-            const category = e.target.dataset.category;
-            window.location.herf = `product.html?category=${encodeURIComponent(category)}`;
-        }
-    });
 });
