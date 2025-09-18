@@ -24,7 +24,8 @@ document.addEventListener("DOMContentLoaded", () => {
             if (e.target.classList.contains("category-item")) {
                 const category = e.target.getAttribute("data-category");
                 
-                window.location.href = `product.html?category=${category}`;
+                localStorage.setItem("selectedCategory", category)
+                window.location.href = "product.html";
             }
         });
     }

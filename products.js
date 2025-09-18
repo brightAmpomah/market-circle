@@ -90,7 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const inCart = cart.find(item => item.name === product.name);
 
         productContainer.innerHTML += `
-        <div class="col-6 col-md-3 mb-2">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-2">
             <div class="card shadow-sm bg-light">
                 <img src="${product.image || "https://via.placeholder.com/150"}" 
                 class="card-img-top fixed-img" alt="${product.name}">
@@ -162,8 +162,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     populateCategories();
 
-    const urlParams = new URLSearchParams(window.location.search);
-    const selectedCategory = urlParams.get("category");
+    const selectedCategory = localStorage.getItem("selectedCategory");
 
     if (selectedCategory && categoryFilter) {
         categoryFilter.value = selectedCategory.toLowerCase();
