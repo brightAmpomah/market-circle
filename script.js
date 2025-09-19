@@ -88,4 +88,3 @@ function hideUserLinks() {
     const greetingMobile = document.getElementById("account-greeting-mobile");
     if (greetingMobile) greetingMobile.innerText = "My Account";
 }
-

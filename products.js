@@ -1,5 +1,3 @@
-
-
 document.addEventListener("DOMContentLoaded", () => {
     
     const productContainer = document.getElementById("product-list");
@@ -160,14 +158,77 @@ document.addEventListener("DOMContentLoaded", () => {
         categoryFilter.addEventListener("change", renderProducts);
     }
 
-    populateCategories();
 
-    const selectedCategory = localStorage.getItem("selectedCategory");
+    function renderCarousel() {
+    const carouselContent = document.getElementById("carousel-content");
+    if (!carouselContent) return;
 
-    if (selectedCategory && categoryFilter) {
-        categoryFilter.value = selectedCategory.toLowerCase();
+    const today = new Date().getDate();
+    const deals = [];
+    for (let i = 0; i < 2; i++) {
+        deals.push(products[(today + i) % products.length]);
     }
-    
+
+    const categories = [...new Set(products.map(p => p.category))].slice(0, 4);
+    const bestSellers = products.slice(2, 5);
+
+    carouselContent.innerHTML = `
+        <div class="carousel-item active">
+            <div class="row text-center">
+                <h4 class="mb-3">Today's Deals</h4>
+                ${deals.map(d => `
+                <div class="col-md-4 col-6">
+                    <div class="card shadow-sm">
+                        <img src="${d.image}" class="card-img-top fixed-img" alt="${d.name}">
+                        <div class="card-body">
+                            <span class="badge bg-danger">-${Math.floor(Math.random()*50)+10}%</span>
+                            <p class="fw-bold">${d.name}</p>
+                            <p class="text-muted">Ghc ${Number(d.price).toFixed(2)}</p>
+                            <button class="btn btn-primary btn-sm" onclick="addToCart(${products.indexOf(d)})">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                `).join("")}
+            </div>
+        </div>
+
+        <div class="carousel-item">
+            <div class="row text-center">
+                <h4 class="mb-3">Top Categories</h4>
+                ${categories.map(cat => `
+                    <div class="col-3">
+                        <div class="p-3 border rounded">${cat.charAt(0).toUpperCase() + cat.slice(1)}</div>
+                    </div>
+                `).join("")}
+            </div>
+        </div>
+
+        <div class="carousel-item">
+            <div class="row text-center">
+                <h4 class="mb-3">Best Sellers</h4>
+                ${bestSellers.map(b => `
+                <div class="col-md-4 col-6">
+                    <div class="card shadow-sm">
+                        <img src="${b.image}" class="card-img-top fixed-img" alt="${b.name}">
+                        <div class="card-body">
+                            <p class="fw-bold">${b.name}</p>
+                            <p class="text-muted">Ghc ${Number(b.price).toFixed(2)}</p>
+                            <button class="btn btn-primary btn-sm" onclick="addToCart(${products.indexOf(b)})">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                `).join("")}
+            </div>
+        </div>
+        
+        `;
+    }
+
+    populateCategories();
     renderProducts();
+    renderCarousel();
+    
 });
+
+
 

@@ -14,8 +14,48 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
 <body>
+      <nav class="navbar navbar-light bg-light shadow-sm px-3">
+        <div class="container-fluid d-flex align-items-center justify-content-between">
+            <button class="btn btn-outline me-2" 
+            type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu" aria-controls="offcanvasMenu">
+                <i class="bi bi-list"></i>
+            </button>
+
+            <a href="index.html" class="navbar-brand fw-bold">MartetCircle</a>
+
+            <div class="d-none d-lg-flex align-items-center flex-grow-1 mx-3">
+                <button class="btn btn-link text-dark me-3" data-bs-toggle="modal" data-bs-target="#locationModal">
+                    <i class="bi bi-geo-alt fs-5"></i>
+                </button>
+
+                
+                <form class="d-flex position-relative w-100">
+                     <div class="input-group w-100">
+                        <span class="input-group-text bg-white"><i class="bi bi-search"></i></span>
+                        <input type="search" id="navbar-search" class="form-control" placeholder="Search products...">
+                    </div>
+                    <div id="category-dropdown" class="list-group position-absolute w-100 shadow-sm d-none" style="top: 100%; z-index: 1000;"></div>
+                </form>
+                
+            </div>
+            
+            <button class="btn position-relative me-2">
+                <i class="bi bi-heart fs-4"></i>
+                <span id="wishlist-count" class="position-absolute top-50 start-100 translate-middle badge bg-danger rounded-pill">0</span>
+            </button>
+
+            <button class="btn position-relative d-none d-lg-inline" onclick="window.location.href='cart.html'">
+                <i class="bi bi-cart3 fs-4"></i>
+                <span id="cart-count" class="position-absolute top-50 start-100 translate-middle badge bg-danger rounded-pill">0</span>
+            </button>
+        </div> 
+        <div class="mobile-buttom-nav d-flex d-lg-none justify-content-around align-items-center border-top bg-white py-2 px-3 fixed-bottom">
+            <a href="product.html" class="text-dark text-decoration-none text-center flex-fill"><i class="bi bi-grid fs-5 d-block"></i><small> Categories</small></a>
+            <a href="cart.html" class="text-dark text-decoration-none text-center flex-fill"><i class="bi bi-cart fs-5 d-block"></i><small> Cart</small></a>
+            <a href="checkout.html" class="text-dark text-decoration-none text-center flex-fill"><i class="bi bi-stack fs-5 d-block"></i><small> Checkout</small></a>
+        </div>
+    </nav>
     
-    <div id="navbar-placeholder"></div>
     <div id="login-placeholder"></div>
 
     <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasMenu" aria-labelledby="offcanvasMenuLabel">
@@ -292,15 +332,6 @@
         .then(data => {
             document.getElementById("login-placeholder").innerHTML = data;
             initLoginForms();
-        });
-    </script>
-
-    <script>
-        fetch("navbar.html")
-        .then(res => res.text())
-        .then(data => {
-            document.getElementById("navbar-placeholder").innerHTML = data;
-            initLoginState();
         });
     </script>
 
